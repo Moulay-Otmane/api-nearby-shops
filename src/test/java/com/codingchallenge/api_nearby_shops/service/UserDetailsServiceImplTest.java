@@ -25,7 +25,7 @@ public class UserDetailsServiceImplTest {
 
     @Test
     public void should_load_user_by_username(){
-        String email = Fixture.userArg().getEmail();
+        String email = Fixture.loginArg().getEmail();
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(Fixture.user()));
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
@@ -38,7 +38,7 @@ public class UserDetailsServiceImplTest {
 
     @Test(expected = UserNotFoundException.class)
     public void should_throw_user_not_found_exception_when_trying_to_load_user_using_invalid_username(){
-        String email = Fixture.userArg().getEmail();
+        String email = Fixture.loginArg().getEmail();
         when(userRepository.findByEmail(email)).thenReturn(Optional.ofNullable(null));
         userDetailsService.loadUserByUsername(email);
     }

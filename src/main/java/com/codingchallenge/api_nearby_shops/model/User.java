@@ -10,8 +10,25 @@ public class User {
     private String id;
     private String email;
     private String password;
+    private String city;
+    private Location location;
 
     public User(){}
+
+    public User(String id, String email, String password, String city, Location location) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.city = city;
+        this.location = location;
+    }
+
+    public User(String email, String password, String city, Location location) {
+        this.email = email;
+        this.password = password;
+        this.city = city;
+        this.location = location;
+    }
 
     public User(String id, String email, String password) {
         this.id = id;
@@ -48,4 +65,19 @@ public class User {
         this.password = password;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }

@@ -1,8 +1,9 @@
 package com.codingchallenge.api_nearby_shops.controller;
 
 import com.codingchallenge.api_nearby_shops.service.AuthenticationService;
-import com.codingchallenge.api_nearby_shops.service.arg.UserArg;
+import com.codingchallenge.api_nearby_shops.service.arg.LoginArg;
 import com.codingchallenge.api_nearby_shops.service.dto.JwtTokenDTO;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<JwtTokenDTO> authenticate(@RequestBody @Valid UserArg userArg){
-        final JwtTokenDTO jwtTokenDTO = new JwtTokenDTO(authenticationService.authenticate(userArg));
+    public ResponseEntity<JwtTokenDTO> authenticate(@RequestBody @Valid LoginArg loginArg){
+        final JwtTokenDTO jwtTokenDTO = new JwtTokenDTO(authenticationService.authenticate(loginArg));
         return ResponseEntity.ok(jwtTokenDTO);
+    }
+
+    @PostMapping("/check-token-validity")
+    public ResponseEntity<Boolean> checkTokenValidity(@RequestBody ObjectNode token){
+        return ResponseEntity.ok(authenticationService.checkTokenValidity(token.get("token").asText()));
     }
 }

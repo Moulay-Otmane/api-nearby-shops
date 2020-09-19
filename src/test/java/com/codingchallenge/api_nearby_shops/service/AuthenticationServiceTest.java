@@ -36,15 +36,15 @@ public class AuthenticationServiceTest {
     @Test
     public void should_authenticate(){
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(Fixture.userArg().getEmail(), Fixture.userArg().getPassword());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(Fixture.loginArg().getEmail(), Fixture.loginArg().getPassword());
         UserDetails userDetails = new User(Fixture.user().getEmail(), Fixture.user().getPassword(), new ArrayList<>());
-        when(userDetailsService.loadUserByUsername(Fixture.userArg().getEmail())).thenReturn(userDetails);
+        when(userDetailsService.loadUserByUsername(Fixture.loginArg().getEmail())).thenReturn(userDetails);
         when(authenticationManager.authenticate(authentication)).thenReturn(authentication);
         when(jwtTokenUtil.generateToken(userDetails)).thenReturn(Fixture.token());
 
-        String token = authenticationService.authenticate(Fixture.userArg());
+        String token = authenticationService.authenticate(Fixture.loginArg());
 
-        verify(userDetailsService).loadUserByUsername(Fixture.userArg().getEmail());
+        verify(userDetailsService).loadUserByUsername(Fixture.loginArg().getEmail());
         verify(authenticationManager).authenticate(authentication);
         verify(jwtTokenUtil).generateToken(userDetails);
         assertThat(token).isEqualTo(Fixture.token());
@@ -52,10 +52,10 @@ public class AuthenticationServiceTest {
 
     @Test(expected = UserNotFoundException.class)
     public void should_throw_user_not_found_exception_when_a_not_registered_user_try_to_authenticate(){
-        Authentication authentication = new UsernamePasswordAuthenticationToken(Fixture.userArg().getEmail(), Fixture.userArg().getPassword());
-        when(userDetailsService.loadUserByUsername(Fixture.userArg().getEmail())).thenThrow(new UserNotFoundException("USER_NOT_FOUND"));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(Fixture.loginArg().getEmail(), Fixture.loginArg().getPassword());
+        when(userDetailsService.loadUserByUsername(Fixture.loginArg().getEmail())).thenThrow(new UserNotFoundException("USER_NOT_FOUND"));
         when(authenticationManager.authenticate(authentication)).thenReturn(authentication);
-        authenticationService.authenticate(Fixture.userArg());
+        authenticationService.authenticate(Fixture.loginArg());
     }
 
 }

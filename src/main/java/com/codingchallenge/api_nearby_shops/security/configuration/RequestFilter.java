@@ -35,7 +35,6 @@ public class RequestFilter extends OncePerRequestFilter {
         final String requestAuthorisation = httpServletRequest.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
-
             if(requestAuthorisation != null && requestAuthorisation.startsWith("auth-token ")){
 
                 jwtToken = requestAuthorisation.substring(11);

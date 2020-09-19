@@ -42,7 +42,9 @@ public class UserServiceTest {
         User savedUser = UserCaptor.getValue();
         assertThat(savedUser.getEmail()).isEqualTo(Fixture.userArg().getEmail());
         assertThat(savedUser.getPassword()).isEqualTo("$2a$10$vUUe4wKvpvKSKbjxQt47jeMnx/W9xO2jn89vblUCLEhztv6kd8q7u");
-
+        assertThat(savedUser.getCity()).isEqualTo(Fixture.userArg().getCity());
+        assertThat(savedUser.getLocation().getLatitude()).isEqualTo(Fixture.userArg().getLocation().getLatitude());
+        assertThat(savedUser.getLocation().getLongitude()).isEqualTo(Fixture.userArg().getLocation().getLongitude());
     }
 
     @Test(expected = UserAlreadyExistException.class)

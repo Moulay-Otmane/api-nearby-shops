@@ -22,7 +22,12 @@ public class UserService {
         if (userRepository.findByEmail(userArg.getEmail()).isPresent()){
             throw new UserAlreadyExistException("EMAIL_ALREADY_USED");
         }else{
-            userRepository.save(new User(userArg.getEmail(), passwordEncoder.encode(userArg.getPassword())));
+            userRepository.save(
+                    new User(userArg.getEmail(),
+                            passwordEncoder.encode(userArg.getPassword()),
+                            userArg.getCity(),
+                            userArg.getLocation()
+                    ));
         }
     }
 }

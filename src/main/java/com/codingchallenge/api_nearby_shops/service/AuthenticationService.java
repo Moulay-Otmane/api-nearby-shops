@@ -3,7 +3,6 @@ package com.codingchallenge.api_nearby_shops.service;
 
 import com.codingchallenge.api_nearby_shops.security.configuration.JwtTokenUtil;
 import com.codingchallenge.api_nearby_shops.service.arg.LoginArg;
-import com.codingchallenge.api_nearby_shops.service.arg.UserArg;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -24,6 +23,9 @@ public class AuthenticationService {
         this.userDetailsService = userDetailsService;
     }
 
+    /*
+    *  This function check the validity of login information and generate authentication token.
+    * */
     public String authenticate(LoginArg loginArg){
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginArg.getEmail(), loginArg.getPassword()));
@@ -38,6 +40,9 @@ public class AuthenticationService {
         return jwtTokenUtil.generateToken(userDetails);
     }
 
+    /*
+    * This function check the validity of the token sent as parameter.
+    * */
     public boolean checkTokenValidity(String token){
         UserDetails userDetails = userDetailsService.loadUserByUsername(jwtTokenUtil.extractUsernameFromToken(token));
         return jwtTokenUtil.isTokenValid(token, userDetails);

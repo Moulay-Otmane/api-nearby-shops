@@ -1,6 +1,7 @@
 package com.codingchallenge.api_nearby_shops.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
@@ -11,34 +12,23 @@ public class User {
     private String email;
     private String password;
     private String city;
-    private Location location;
+    private Point location;
 
     public User(){}
 
-    public User(String id, String email, String password, String city, Location location) {
-        this.id = id;
+    public User(String email, String password, String city, Point location) {
         this.email = email;
         this.password = password;
         this.city = city;
         this.location = location;
     }
 
-    public User(String email, String password, String city, Location location) {
+    public User(String id, String email, String password, String city, Point location) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.city = city;
         this.location = location;
-    }
-
-    public User(String id, String email, String password) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
     }
 
     public String getId() {
@@ -73,11 +63,11 @@ public class User {
         this.city = city;
     }
 
-    public Location getLocation() {
+    public Point getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(Point location) {
         this.location = location;
     }
 }

@@ -1,51 +1,42 @@
-package com.codingchallenge.api_nearby_shops.model;
+package com.codingchallenge.api_nearby_shops.service.dto;
 
-import org.springframework.data.annotation.Id;
+import com.codingchallenge.api_nearby_shops.model.Reaction;
 import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Document(collection = "shop")
-public class Shop {
+public class ShopDTO implements Serializable {
 
-    @Id
+    private static final long serialVersionUID = -3828441884952914093L;
+
     private String id;
     private String name;
     private String email;
     private String picture;
     private String city;
+    private double distance;
     private String address;
-
-    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private Point location;
-
     private List<Reaction> reactions;
 
-    public Shop() {
-    }
-
-    public Shop(String name, String email, String picture, String city, String address, Point location, List<Reaction> reactions) {
+    public ShopDTO(String id, String name, String email, String picture, String city, double distance, String address) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.city = city;
+        this.distance = distance;
         this.address = address;
-        this.location = location;
-        this.reactions = reactions;
     }
 
-    public Shop(String id, String name, String email, String picture, String city, String address, Point location, List<Reaction> reactions) {
+    public ShopDTO(String id, String name, String email, String picture, String city, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.city = city;
         this.address = address;
-        this.location = location;
-        this.reactions = reactions;
     }
 
     public String getId() {
@@ -86,6 +77,14 @@ public class Shop {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public String getAddress() {

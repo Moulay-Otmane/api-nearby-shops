@@ -1,15 +1,19 @@
 package com.codingchallenge.api_nearby_shops.model;
 
+import java.time.LocalDateTime;
+
 public class Reaction {
     private ReactionType reactionType;
-    private String UserId;
+    private String userId;
+    private LocalDateTime createdAt;
 
     public Reaction() {
     }
 
-    public Reaction(ReactionType reactionType, String userId) {
+    public Reaction(ReactionType reactionType, String userId, LocalDateTime createdAt) {
         this.reactionType = reactionType;
-        UserId = userId;
+        this.userId = userId;
+        this.createdAt = createdAt;
     }
 
     public ReactionType getReactionType() {
@@ -21,10 +25,18 @@ public class Reaction {
     }
 
     public String getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(String userId) {
-        UserId = userId;
+        this.userId = userId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

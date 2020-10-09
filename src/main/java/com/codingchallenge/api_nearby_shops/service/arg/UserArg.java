@@ -1,6 +1,6 @@
 package com.codingchallenge.api_nearby_shops.service.arg;
 
-import com.codingchallenge.api_nearby_shops.model.Location;
+import org.springframework.data.geo.Point;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -18,12 +18,12 @@ public class UserArg {
     private String city;
 
     @NotNull
-    private Location location;
+    private Point location;
 
     public UserArg() {
     }
 
-    public UserArg(@NotNull @Email String email, @NotNull String password, @NotNull String city, @NotNull Location location) {
+    public UserArg(@NotNull @Email String email, @NotNull String password, @NotNull String city, @NotNull Point location) {
         this.email = email;
         this.password = password;
         this.city = city;
@@ -54,11 +54,11 @@ public class UserArg {
         this.city = city;
     }
 
-    public Location getLocation() {
+    public Point getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(Point location) {
         this.location = location;
     }
 }

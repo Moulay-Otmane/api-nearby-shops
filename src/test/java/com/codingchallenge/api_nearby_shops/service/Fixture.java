@@ -1,9 +1,17 @@
 package com.codingchallenge.api_nearby_shops.service;
 
-import com.codingchallenge.api_nearby_shops.model.Location;
+import com.codingchallenge.api_nearby_shops.model.Reaction;
+import com.codingchallenge.api_nearby_shops.model.ReactionType;
+import com.codingchallenge.api_nearby_shops.model.Shop;
 import com.codingchallenge.api_nearby_shops.model.User;
 import com.codingchallenge.api_nearby_shops.service.arg.LoginArg;
 import com.codingchallenge.api_nearby_shops.service.arg.UserArg;
+import org.springframework.data.geo.Point;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Fixture {
 
@@ -23,8 +31,15 @@ public class Fixture {
         return new LoginArg("user.test@gmail.com","123456789");
     }
 
-    static Location location(){
-        return new Location(-7.632852,33.608580);
+    static Point location(){
+        return new Point(-7.632852,33.608580);
+    }
+
+    static List<Shop> shops() {
+        return Arrays.asList(
+                new Shop("111shop11111111", "shop 1", "shop.1@email.com","image_shop_1", "city 1", "address 1", new Point(11111,22222),  Arrays.asList(new Reaction(ReactionType.LIKE, user().getId(), LocalDateTime.now()))),
+                new Shop("222shop22222222", "shop 2", "shop.2@email.com","image_shop_2", "city 1", "address 2", new Point(11122,22233),   Arrays.asList(new Reaction(ReactionType.LIKE, user().getId(), LocalDateTime.now())))
+        );
     }
 
 }
